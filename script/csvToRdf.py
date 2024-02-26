@@ -6,7 +6,7 @@ def cleanString(s):
     return cleanStr
 
 # Create output file and define name spaces
-with open('battles.ttl', 'w') as file:
+with open('../data/battles.ttl', 'w') as file:
     namespaces = [
         "@prefix : <http://127.0.0.1:3030/> .\n",
         "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n",
@@ -89,7 +89,7 @@ with open('battles.ttl', 'w') as file:
 
 
     # Add main battle data
-    battlesCsv = pd.read_csv("sourceData/battles.csv", sep=",", quotechar='"')
+    battlesCsv = pd.read_csv("../data/battles.csv", sep=",", quotechar='"')
     for index, row in battlesCsv.iterrows():
 
         # Extract battle winners
@@ -112,7 +112,7 @@ with open('battles.ttl', 'w') as file:
 
 
     # Add duration data
-    durationsCsv = pd.read_csv("sourceData/battle_durations.csv", sep=",", quotechar='"')
+    durationsCsv = pd.read_csv("../data/battle_durations.csv", sep=",", quotechar='"')
     for index, row in durationsCsv.iterrows():
         dateMin, dateMax = str(row['datetime_min']), str(row['datetime_max'])
         dateMin = dateMin.split("T")[0] if dateMin != "nan" else "0000-00-00"
@@ -123,7 +123,7 @@ with open('battles.ttl', 'w') as file:
 
 
     # Add belligerant data
-    actorsCsv = pd.read_csv("sourceData/battle_actors.csv", sep=",", quotechar='"')
+    actorsCsv = pd.read_csv("../data/battle_actors.csv", sep=",", quotechar='"')
     for index, row in actorsCsv.iterrows():
         # Side nodes
         sideId = str(row['isqno']) + "_" + cleanString(row['actor'])
@@ -141,7 +141,7 @@ with open('battles.ttl', 'w') as file:
 
 
     # Add commanders data
-    commandersCsv = pd.read_csv("sourceData/commanders.csv", sep=",", quotechar='"', encoding='latin1')
+    commandersCsv = pd.read_csv("../data/commanders.csv", sep=",", quotechar='"', encoding='latin1')
     for index, row in commandersCsv.iterrows():
         if row['commanders'] is None or row['commanders'] == "" or str(row['commanders']) == "nan": continue
 
