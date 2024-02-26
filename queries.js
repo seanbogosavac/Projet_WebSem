@@ -1,4 +1,4 @@
-function getAllWars(query) {
+function getAllWars() {
     $.ajax({
         url: 'http://localhost:3030/Battles/query',
         dataType: 'json',
