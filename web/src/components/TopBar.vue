@@ -1,8 +1,8 @@
 <template>
   <div class="top-bar">
-    <div class="logo">BattlePedia</div>
-    <router-link to="/">Home</router-link>
-    <router-link to="/war">War</router-link>
+    <router-link to="/">
+      <div class="logo">BattlePedia</div>
+    </router-link>
     <router-link to="/battle">Battle</router-link>
     <router-link to="/commander">Commander</router-link>
     <div class="search-bar">
@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts">
-  export default {
-    name: 'TopBar'
-  }
+export default {
+  name: 'TopBar'
+}
 </script>
 
 <style scoped>
@@ -27,8 +27,10 @@
   padding: 10px 20px;
 }
 
-.logo {
-  font-size: 24px;
+.logo, .logo:hover, .logo:active  {
+  font-size: 30px;
+  text-decoration: none;
+  color: white;
 }
 
 .search-bar input {
@@ -37,5 +39,4 @@
   border: 1px solid white;
   background-color: transparent;
   color: white;
-}
-</style>
+}</style>
