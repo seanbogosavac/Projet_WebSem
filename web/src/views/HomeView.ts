@@ -10,7 +10,7 @@ export default defineComponent({
     name: 'HomeView',
     data() {
         return {
-            warList: null as warList | any
+            warList: null as warList | null
         }
     },
     computed: {

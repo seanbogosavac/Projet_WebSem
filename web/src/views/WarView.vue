@@ -7,6 +7,7 @@
 
     <div v-if="isReady">
       {{ battleList }}
+      <svg id="map" width="960" height="500"></svg>
     </div>
   </main>
 </template>

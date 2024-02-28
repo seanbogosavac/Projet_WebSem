@@ -4,7 +4,7 @@ interface graphResponse {
     },
     results: {
         bindings: Array<{
-            [key: string]: {type: string, value: string}
+            [key: string]: {type: string, value: string | float | int}
         }>
     }
 }
