@@ -6,8 +6,8 @@
     Select a war to learn more !
 
     <div v-if="isReady">
-      {{ battleList }}
-      <svg id="map" width="960" height="500"></svg>
+      <h1>{{ battleList[0].warName }}</h1>
     </div>
+    <svg id="map" width="960" height="500"></svg>
   </main>
 </template>

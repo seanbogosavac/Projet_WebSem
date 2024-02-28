@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue'
+import * as d3 from 'd3'
 
 export default defineComponent({
     name: 'WarView',
@@ -58,7 +59,52 @@ export default defineComponent({
             battle: item.battle.value,
             name: item.name.value,
             beginDate: item.beginDate.value,
-            coord: item.coord.value,
+            long: parseFloat(item.coord.value.split(' ')[0]),
+            lat: parseFloat(item.coord.value.split(' ')[1])
         }));
+
+        console.log(this.battleList)
+
+        const svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height");
+
+        const projection = d3.geoNaturalEarth1()
+            .scale(width / 1.3 / Math.PI)
+            .translate([width / 2, height / 2])
+
+        const data2 = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+
+        const points = this.battleList.map(item => ({
+            "type": "Feature",
+            "properties": { "name": item.name },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [item.lat, item.long]
+            }
+        }))
+
+        console.log(points)
+
+        svg.append("g")
+            .selectAll("path")
+            .data(data2.features)
+            .enter().append("path")
+            .attr("fill", "#69b3a2")
+            .attr("d", d3.geoPath()
+                .projection(projection)
+            )
+            .style("stroke", "#fff")
+
+        svg.append("g")
+            .selectAll("path")
+            .data(points)
+            .enter().append("path")
+            .attr("fill", "#FF0000")
+            .attr("d", d3.geoPath()
+                .projection(projection)
+            )
+            .style("stroke", "#fff")
+
     }
 })
