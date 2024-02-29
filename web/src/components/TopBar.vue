@@ -3,8 +3,6 @@
     <router-link to="/">
       <div class="logo">BattlePedia</div>
     </router-link>
-    <router-link to="/battle">Battle</router-link>
-    <router-link to="/commander">Commander</router-link>
     <div class="search-bar">
       <input type="text" placeholder="Search...">
     </div>

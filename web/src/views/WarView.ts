@@ -14,6 +14,13 @@ export default defineComponent({
     },
     components: {
     },
+    methods: {
+        formatDate: function (dateString: string): string {
+            const parts = dateString.split("-");
+            const reformattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`
+            return reformattedDate;
+        }
+    },
     async mounted() {
         const tag = this.$route.params.warTag
 
@@ -32,7 +39,7 @@ export default defineComponent({
             PREFIX georss: <http://www.georss.org/georss/>
             PREFIX : <http://127.0.0.1:3030/>
 
-            SELECT DISTINCT ?warName ?battle ?name ?beginDate ?coord
+            SELECT DISTINCT ?warName ?battle ?name ?beginDate ?coord ?abstract
             WHERE {
                 ?battle a :Battle .
                 ?battle :hasName ?name .
@@ -56,14 +63,12 @@ export default defineComponent({
 
         this.battleList = data.results.bindings.map(item => ({
             warName: item.warName.value,
-            battle: item.battle.value,
+            id: item.battle.value.replace("http://127.0.0.1:3030/", ''),
             name: item.name.value,
-            beginDate: item.beginDate.value,
+            beginDate: this.formatDate(item.beginDate.value),
             long: parseFloat(item.coord.value.split(' ')[0]),
             lat: parseFloat(item.coord.value.split(' ')[1])
         }));
-
-        console.log(this.battleList)
 
         const svg = d3.select("svg"),
             width = +svg.attr("width"),
@@ -83,8 +88,6 @@ export default defineComponent({
                 "coordinates": [item.lat, item.long]
             }
         }))
-
-        console.log(points)
 
         svg.append("g")
             .selectAll("path")

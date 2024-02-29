@@ -93,7 +93,6 @@ with open('../data/battles.ttl', 'w') as file:
     for index, row in battlesCsv.iterrows():
 
         # Extract battle winners
-        # WARNING : ALL VALUES FROM THE ENUM ARE INCREMENTED TO AVOID ISSUES WITH -1
         winVal = row['wina']
         winVal = -1 if np.isnan(winVal) else winVal
 

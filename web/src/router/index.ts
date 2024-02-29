@@ -9,8 +9,8 @@ const router = createRouter({
   routes: [
     { path: '/', name: "Home", component: HomeView },
     { path: '/war/:warTag', name: "War", component: WarView, props: true },
-    { path: '/battle', name: "Battle", component: BattleView },
-    { path: '/commander', name: "Commander", component: CommanderView }
+    { path: '/battle/:battleId', name: "Battle", component: BattleView, props: true },
+    { path: '/commander/:commanderTag', name: "Commander", component: CommanderView, props: true }
   ]
 })
 
